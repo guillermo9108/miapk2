@@ -2,13 +2,7 @@ name: Build Android APK
 
 on:
   push:
-    branches:
-      - main
-      - app4 # Agregado para que detecte tus cambios actuales
-  pull_request:
-    branches:
-      - main
-      - app4
+    branches: [main, app4]
   workflow_dispatch:
 
 jobs:
@@ -30,7 +24,7 @@ jobs:
         with:
           expo-version: latest
           eas-version: latest
-          token: ${{ secrets.EXPO4_TOKEN }} # Ajustado a tu nombre de secret
+          token: ${{ secrets.EXPO4_TOKEN }} # <--- El 4 es clave aquí
 
       - name: 📦 Install dependencies
         working-directory: ./frontend
@@ -38,13 +32,6 @@ jobs:
 
       - name: 🚀 Build APK
         working-directory: ./frontend
-        run: eas build --platform android --profile preview --non-interactive --no-wait
         env:
-          EXPO_TOKEN: ${{ secrets.EXPO4_TOKEN }} # Ajustado a tu nombre de secret
-
-      - name: 📝 Build info
-        run: |
-          echo "✅ Build started successfully!"
-          echo "📱 Check your build status at: https://expo.dev/accounts/guillermo9108/projects/streampay3/builds"
-          echo ""
-          echo "⚠️  Note: The build process continues on Expo's servers."
+          EXPO_TOKEN: ${{ secrets.EXPO4_TOKEN }} # <--- Y aquí también
+        run: eas build --platform android --profile preview --non-interactive --no-wait
