@@ -30,7 +30,7 @@ jobs:
         with:
           expo-version: latest
           eas-version: latest
-          token: ${{ secrets.EXPO_TOKEN }}
+          token: ${{ secrets.EXPO4_TOKEN }}
 
       - name: 📦 Install dependencies
         working-directory: ./frontend
@@ -38,9 +38,9 @@ jobs:
 
       - name: 🚀 Build APK
         working-directory: ./frontend
-        run: eas build --platform android --profile preview --non-interactive --no-wait
         env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+          EXPO_TOKEN: ${{ secrets.EXPO4_TOKEN }}
+        run: eas build --platform android --profile preview --non-interactive --no-wait
 
       - name: 📝 Build info
         run: |
@@ -48,4 +48,3 @@ jobs:
           echo "📱 Check your build status at: https://expo.dev/accounts/guillermo9108/projects/streampay3/builds"
           echo ""
           echo "⚠️  Note: The build process continues on Expo's servers."
-          echo "You'll receive an email when it's complete."
